@@ -1,0 +1,28 @@
+[project]
+name = "slack-mcp-server"
+version = "0.1.0"
+description = "AI-powered Slack integration MCP server with natural language search capabilities"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp>=2.10.5",
+    "mcp[cli]>=1.11.0",
+    "slack-sdk>=3.33.0",
+    "openai>=1.0.0",
+    "sentence-transformers>=2.2.0",
+    "numpy>=1.21.0",
+    "scikit-learn>=1.0.0",
+    "python-dateutil>=2.8.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/jianrongzhang89/slack-mcp-server"
+Repository = "https://github.com/jianrongzhang89/slack-mcp-server"
+Issues = "https://github.com/jianrongzhang89/slack-mcp-server/issues"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=22.0.0",
+    "ruff>=0.1.0",
+]
