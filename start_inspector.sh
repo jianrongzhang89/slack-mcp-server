@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Quick Start Script for MCP Inspector
-# This script starts the MCP Inspector with proper environment setup
+# This script starts the MCP Inspector connected to the Slack MCP Server
 
 set -e
 
@@ -30,9 +30,17 @@ if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
     export PATH="$HOME/bin:$PATH"
 fi
 
-echo "🎯 Starting MCP Inspector..."
-echo "   Use the complete URL with session token!"
+# Check if wrapper script exists
+if [[ ! -f "$HOME/bin/mcp-server-everything" ]]; then
+    echo "❌ Error: Wrapper script not found at ~/bin/mcp-server-everything"
+    echo "   Please run: ./setup_inspector.sh first"
+    exit 1
+fi
+
+echo "🎯 Starting MCP Inspector connected to your Slack MCP server..."
+echo "   The inspector will open in your browser with a unique session URL"
+echo "   Use that URL to interact with your Slack MCP server!"
 echo ""
 
-# Start the MCP Inspector
-exec npx @modelcontextprotocol/inspector 
+# Start the MCP Inspector with the server connection
+exec npx @modelcontextprotocol/inspector mcp-server-everything 

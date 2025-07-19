@@ -9,7 +9,7 @@ import os
 from datetime import datetime
 from typing import Optional, List, Dict, Any
 
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 from ai_search import search_engine
@@ -410,12 +410,18 @@ def get_slack_resource(resource_type: str) -> str:
         return f"Unknown Slack resource type: {resource_type}"
 
 if __name__ == "__main__":
-    print("Running MCP Development Server with Slack integration...")
+    import sys
+    
+    # Print debug info to stderr so it doesn't interfere with MCP protocol
+    print("Running MCP Development Server with Slack integration...", file=sys.stderr)
     
     # Check Slack configuration
     if os.getenv('SLACK_BOT_TOKEN'):
-        print("✅ Slack integration enabled")
+        print("✅ Slack integration enabled", file=sys.stderr)
     else:
-        print("⚠️  Slack integration disabled - set SLACK_BOT_TOKEN environment variable")
+        print("⚠️  Slack integration disabled - set SLACK_BOT_TOKEN environment variable", file=sys.stderr)
     
+    print("Server ready for connections...", file=sys.stderr)
+    
+    # Run in stdio mode for MCP Inspector compatibility
     mcp.run() 
